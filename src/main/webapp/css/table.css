@@ -1,0 +1,9 @@
+.table {
+    width: 40vw;
+    height: 50vh;
+    /*background: red;*/
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    box-shadow: 0.1vw 0.1vw #fff;
+    padding: 2%;
+}

@@ -1,0 +1,57 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.header{
+    width: 100%;
+    height: 12vh;
+    background-color: rgb(27, 56, 221);
+    box-shadow: 0.1vw 0.1vw #ddd;
+    color: #fff;
+}
+
+.top {
+    height: 60%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* background-color: red; */
+    align-items: center;
+}
+
+.toptitle {
+    height: 100%;
+    font-size: 2vw;
+    margin-left: 1%;
+    line-height: 200%;
+}
+
+.topheadPoint {
+    width: 2%;
+    height: 80%;
+    margin-right: 0.5%;
+    background-color: red;
+    background: url(./out.png) center no-repeat;
+    background-size: contain;
+}
+
+.botton{
+    height: 40%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    color: #fff;
+}
+
+.choose {
+    width: 9%;
+    color: #fff;
+    /* background-color: red; */
+    text-align: center;
+}
+
+.tag {
+    color: #fff;
+    text-decoration: none;
+}
