@@ -5,11 +5,17 @@ import com.takeout.mapper.impl.GoodsDaoImpl;
 import com.takeout.utils.StringUtil;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import javax.servlet.http.Part;
+import java.io.*;
+import java.nio.file.Paths;
 
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2,   // 2MB
+        maxFileSize = 1024 * 1024 * 10,        // 10MB
+        maxRequestSize = 1024 * 1024 * 50)     // 50MB
 public class UpdateGoods extends HttpServlet {
 
     private GoodsDaoImpl goodsDao;
@@ -31,11 +37,30 @@ public class UpdateGoods extends HttpServlet {
         String priceStr = req.getParameter("price");
         String description = req.getParameter("description");
 
+        Part imgPath = req.getPart("image");
+        String fileName = Paths.get(imgPath.getSubmittedFileName()).getFileName().toString();
+        System.out.println("fileName"+fileName);
+
         req.setAttribute("name",name);
         req.setAttribute("price",priceStr);
         req.setAttribute("description",description);
 
-        System.out.println("name: " + name + " price: " + priceStr + " description: " + description );
+//        System.out.println("name: " + name + " price: " + priceStr + " description: " + description );
+        String uploadPath = "D:\\javabian\\javaWebProject\\src\\main\\webapp\\upload";
+
+        String imageUrl = null;
+        if(imgPath != null) {
+            String imagePath = uploadPath + File.separator + fileName;
+            try (InputStream input = imgPath.getInputStream();
+                 OutputStream output = new FileOutputStream(imagePath)) {
+                byte[] buffer = new byte[4096];
+                int bytesRead = -1;
+                while((bytesRead = input.read(buffer)) != -1 ) {
+                    output.write(buffer,0,bytesRead);
+                }
+                imageUrl = fileName;
+            }
+        }
 
         double price;
         req.setAttribute("isOk",false);
@@ -61,7 +86,7 @@ public class UpdateGoods extends HttpServlet {
         goods.setDescription(description);
         goods.setPrice(price);
         goods.setName(name);
-
+        goods.setImage(imageUrl);
         try {
             goodsDao.addGoods(goods);
         }catch (Exception e) {
@@ -70,6 +95,8 @@ public class UpdateGoods extends HttpServlet {
             return;
         }
         resp.getWriter().write("ok");
+
+
 
     }
 }

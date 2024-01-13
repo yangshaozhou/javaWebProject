@@ -119,12 +119,13 @@ public class GoodsDaoImpl  {
         PreparedStatement ps = null;
         try{
             conn = JdbcUtil.getConnection();
-            String sql = "insert into goods(name,price,description,state) values (?,?,?,?) ";
+            String sql = "insert into goods(name,price,description,state,image) values (?,?,?,?,?) ";
             ps = conn.prepareStatement(sql);
             ps.setString(1, goods.getName());
             ps.setDouble(2, goods.getPrice());
             ps.setString(3, goods.getDescription());
             ps.setInt(4, goods.getState());
+                ps.setString(5,goods.getImage());
             ps.executeUpdate();
         } finally {
             JdbcUtil.free(null,ps,conn);
@@ -167,16 +168,34 @@ public class GoodsDaoImpl  {
         PreparedStatement ps =  null;
         try {
             conn = JdbcUtil.getConnection();
-            String sql = "update goods set name=?,price=?,description=?,state=? where id=? ";
+            String sql = "update goods set name=?,price=?,description=?,state=?,image=? where id=? ";
             ps = conn.prepareStatement(sql);
             ps.setString(1, goods.getName());
             ps.setDouble(2, goods.getPrice());
             ps.setString(3, goods.getDescription());
             ps.setInt(4, goods.getState());
-            ps.setInt(5, goods.getId());
+            ps.setString(5,goods.getImage());
+            ps.setInt(6, goods.getId());
             ps.executeUpdate();
         }finally {
             JdbcUtil.free(null,ps,conn);
+        }
+    }
+
+//    删除菜品
+    public boolean deleteGoods(String id) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+              conn = JdbcUtil.getConnection();
+            String sql = "DELETE FROM goods WHERE id=?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            ps.executeUpdate();
+            return true;
+        }finally {
+            JdbcUtil.free(rs,ps,conn);
         }
     }
 }

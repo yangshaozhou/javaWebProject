@@ -22,6 +22,7 @@
         <div class="mdui-color-indigo" style="text-align: right">
             <a href="/showAllGoods" class="mdui-btn">菜品管理</a>
             <a href="/ManageOrders" class="mdui-btn">订单管理</a>
+            <a href="/showAllUser?pageNum=1" class="mdui-btn">用户管理</a>
             <a href="modifyAdmin.jsp" class="mdui-btn">修改密码</a>
         </div>
 </div>

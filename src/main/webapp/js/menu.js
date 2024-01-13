@@ -2,6 +2,8 @@ document.getElementById("checkBtn").addEventListener("click",function (){
     event.preventDefault()
     var dishName = document.getElementById("user").value
     var xhr = new XMLHttpRequest();
+    // localStorage.setItem("lastSearch",dishName)
+    document.cookie = "lastSearch=" + encodeURIComponent(dishName) + "; expires=" + new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toUTCString();
 
     var url = "/showAllGoods?" + "search=" + dishName
     xhr.open("GET",url,true)
@@ -24,3 +26,9 @@ document.getElementById("checkBtn").addEventListener("click",function (){
 document.getElementById("addButton").addEventListener("click",function ()  {
     window.location.href = "addmenu.jsp"
 })
+
+
+
+
+
+

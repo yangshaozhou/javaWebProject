@@ -20,6 +20,12 @@
     <div class="mdui-dialog-content">
 
       <div class="mdui-textfield">
+        <label for="img_modify" class="mdui-textfield-label">菜品图片</label>
+        <div id="imagePreview" class="mdui-m-t-2"></div>
+        <input id="img_modify" value="${requestScope.goods.image}" name="img" class="mdui-textfield-input" type="file" onchange="displayImage(this)"/>
+      </div>
+
+      <div class="mdui-textfield">
         <label for="name_modify" class="mdui-textfield-label">菜品名称</label>
         <input id="name_modify" value="${requestScope.goods.name}" name="name" class="mdui-textfield-input" type="text"/>
       </div>

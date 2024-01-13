@@ -30,6 +30,7 @@ public class RegisterServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
+        System.out.println(password);
         if(userService.register(username,password)){
             req.getRequestDispatcher("admin.jsp").forward(req,resp);
         }

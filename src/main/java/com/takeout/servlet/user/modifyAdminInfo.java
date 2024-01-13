@@ -1,5 +1,6 @@
 package com.takeout.servlet.user;
 
+import cn.hutool.crypto.digest.MD5;
 import com.takeout.entity.Admin;
 import com.takeout.mapper.impl.AdminDaoImpl;
 import com.takeout.utils.StringUtil;
@@ -28,6 +29,8 @@ public class modifyAdminInfo extends HttpServlet {
             AdminDaoImpl dao = new AdminDaoImpl();
             try {
                 Admin admin = (Admin) req.getSession().getAttribute("admin");
+                MD5 md5 = new MD5();
+                password = md5.digestHex(password);
                 dao.changePassword(admin,password);
                 req.setAttribute("errMsg","修改密码成功,请重新登录");
                 req.getSession().setAttribute("admin",null);

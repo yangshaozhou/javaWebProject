@@ -17,7 +17,11 @@
   <div class="mdui-dialog-title">添加菜品</div>
   <div class="mdui-dialog-content">
 
-
+    <div class="mdui-textfield">
+      <label for="photo" class="mdui-textfield-label">菜品图片</label>
+      <div id="imagePreview" class="mdui-m-t-2"></div>
+      <input id="photo"  name="img" class="mdui-textfield-input" type="file" onchange="displayImage(this)"/>
+    </div>
     <div class="mdui-textfield">
       <label for="name" class="mdui-textfield-label">菜品名称</label>
       <input id="name" name="name" class="mdui-textfield-input" type="text"/>
@@ -34,7 +38,7 @@
   <div class="mdui-dialog-actions">
     <button class="mdui-btn mdui-ripple" onclick="goback()" mdui-dialog-close>取消</button>
     <button class="mdui-btn mdui-ripple"
-            onclick="addGoods('name','price','description')" mdui-dialog-confirm>添加
+            onclick="addGoods('name','price','description','photo')" mdui-dialog-confirm>添加
     </button>
   </div>
 </div>

@@ -127,3 +127,11 @@
 .btn-16:active {
     top: 2px;
 }
+
+.tableStyle:nth-child(2n) {
+    background: #eeafaf;
+}
+
+.tableStyle:nth-child(2n+1) {
+    background: #fff;
+}

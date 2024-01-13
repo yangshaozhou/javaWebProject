@@ -32,8 +32,6 @@ public class ShowAllGoods extends HttpServlet {
         String pageNumStr = req.getParameter("pageNum");
         String searchName = req.getParameter("search");
 
-        System.out.println("searchName1" + searchName);
-
         if(pageNumStr != null) {
             try {
                 pageNum = Integer.parseInt(pageNumStr);
@@ -45,11 +43,10 @@ public class ShowAllGoods extends HttpServlet {
 
         if(searchName != null) {
             name =  searchName;
-            pageNum = 1;
         }
-
         try {
-            Page<Goods> page = goodsDao.queryGoodsByPage(name,pageNum,2, 2);
+            Page<Goods> page = goodsDao.queryGoodsByPage(name,pageNum,5, 2);
+            req.setAttribute("searchName",searchName);
             req.setAttribute("page",page);
             System.out.println(page);
             req.getRequestDispatcher("menu.jsp").forward(req,resp);
